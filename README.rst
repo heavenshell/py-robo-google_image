@@ -5,6 +5,12 @@ robo.handlers.google_image
 
 Search image from google.
 
+Install
+-------
+.. code::
+
+  $ git+https://github.com/heavenshell/py-robo-google_image
+
 Dependency
 ----------
 
