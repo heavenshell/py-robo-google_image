@@ -43,7 +43,7 @@ class NullAdapter(object):
         return message
 
 
-class TestScheduler(TestCase):
+class TestClient(TestCase):
     @classmethod
     def setUpClass(cls):
         cls.client = Client()
@@ -64,7 +64,7 @@ class TestScheduler(TestCase):
         self.assertTrue('unescapedUrl' in ret)
 
 
-class TestLgtmHandler(TestCase):
+class TestGoogleImageHandler(TestCase):
     @classmethod
     def setUpClass(cls):
         logger = logging.getLogger('robo')
