@@ -75,4 +75,4 @@ class GoogleImage(object):
     @cmd(regex=r'image( me)? (?P<keyword>.+)',
          description='Search image from Google.')
     def get(self, message, **kwargs):
-        return self.client.generate(message.match.group(1))
+        return self.client.generate(message.match.group(2))
