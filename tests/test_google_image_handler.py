@@ -85,5 +85,5 @@ class TestGoogleImageHandler(TestCase):
         dummy_response(m, 'fixture.json')
         self.robot.handler_signal.send('test image cat')
         self.assertRegexpMatches(self.robot.adapters['null'].responses[0],
-                                 r'^http://*')
+                                 r'^(http|https)://*')
         self.robot.adapters['null'].responses = []
