@@ -53,7 +53,7 @@ class TestClient(TestCase):
         """ Client().generate() should generate google search url. """
         dummy_response(m, 'fixture.json')
         ret = self.client.generate('cat')
-        self.assertRegexpMatches(ret, r'^http://*')
+        self.assertTrue(ret.startswith('http://'))
 
     @patch('robo.handlers.google_image.requests.get')
     def test_search_resource(self, m):
@@ -84,6 +84,12 @@ class TestGoogleImageHandler(TestCase):
         """ GoogleImage().get() should search google. """
         dummy_response(m, 'fixture.json')
         self.robot.handler_signal.send('test image cat')
-        self.assertRegexpMatches(self.robot.adapters['null'].responses[0],
-                                 r'^(http|https)://*')
+        import sys
+        if sys.version_info[0] == 2:
+            self.assertRegexpMatches(self.robot.adapters['null'].responses[0],
+                                     r'^(http|https)://*')
+        else:
+            self.assertRegex(self.robot.adapters['null'].responses[0],
+                             r'^(http|https)://*')
+
         self.robot.adapters['null'].responses = []
