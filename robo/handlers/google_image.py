@@ -12,6 +12,7 @@
     :copyright: (c) 2015 Shinya Ohyanagi, All rights reserved.
     :license: BSD, see LICENSE for more details.
 """
+import os
 import logging
 import random
 import requests
@@ -23,10 +24,16 @@ logger = logging.getLogger('robo')
 
 class Client(object):
     #: Search animation gif from tumblr.
-    GOOGLE_IMAGE_URL = 'http://ajax.googleapis.com/ajax/services/search/images'
+    GOOGLE_IMAGE_URL = 'https://www.googleapis.com/customsearch/v1'
 
     def __init__(self):
-        self.resource = None
+        self.apikey = os.environ.get('ROBO_GOOGLE_CSE_KEY', None)
+        if self.apikey is None:
+            raise Exception('ROBO_GOOGLE_CSE_KEY')
+
+        self.cseid = os.environ.get('ROBO_GOOGLE_CSE_ID', None)
+        if self.cseid is None:
+            raise Exception('ROBO_GOOGLE_CSE_ID')
 
     def generate(self, query=None):
         """Generate lgtm uri.
@@ -41,7 +48,7 @@ class Client(object):
                 return url['unescapedUrl']
         except Exception as e:
             logger.error('Error raised. Query is {0}'.format(query))
-            logger.error(e)
+            logger.exception(e)
             return None
 
     def search_resource(self, query):
@@ -52,7 +59,8 @@ class Client(object):
         params = {
             'rsz': 8,
             'safe': 'active',
-            'v': '1.0',
+            'cx': self.cseid,
+            'key': self.apikey,
             'q': query
         }
 
