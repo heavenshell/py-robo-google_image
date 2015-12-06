@@ -46,6 +46,8 @@ class NullAdapter(object):
 class TestClient(TestCase):
     @classmethod
     def setUpClass(cls):
+        os.environ['ROBO_GOOGLE_CSE_KEY'] = 'foo'
+        os.environ['ROBO_GOOGLE_CSE_ID'] = 'bar'
         cls.client = Client()
 
     @patch('robo.handlers.google_image.requests.get')
@@ -70,6 +72,9 @@ class TestGoogleImageHandler(TestCase):
         logger = logging.getLogger('robo')
         logger.level = logging.ERROR
         cls.robot = Robot('test', logger)
+
+        os.environ['ROBO_GOOGLE_CSE_KEY'] = 'foo'
+        os.environ['ROBO_GOOGLE_CSE_ID'] = 'bar'
 
         client = GoogleImage()
         client.signal = cls.robot.handler_signal
