@@ -57,8 +57,9 @@ class Client(object):
         :param query: Search query
         """
         params = {
-            'rsz': 8,
-            'safe': 'active',
+            'searchType': 'image',
+            'safe': 'high',
+            'fields': 'items(link)',
             'cx': self.cseid,
             'key': self.apikey,
             'q': query
