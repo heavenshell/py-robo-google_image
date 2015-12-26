@@ -8,6 +8,9 @@
     Porting from
     `ruboty-google_image <https://github.com/r7kamura/ruboty-google_image>`_.
 
+    Since Ver2.0, `robo.handlers.google_image` use Google Custom Search Engine.
+    So, must set CSE key and CSE id from Google.
+
 
     :copyright: (c) 2015 Shinya Ohyanagi, All rights reserved.
     :license: BSD, see LICENSE for more details.
@@ -23,7 +26,6 @@ logger = logging.getLogger('robo')
 
 
 class Client(object):
-    #: Search animation gif from tumblr.
     GOOGLE_IMAGE_URL = 'https://www.googleapis.com/customsearch/v1'
 
     def __init__(self):
