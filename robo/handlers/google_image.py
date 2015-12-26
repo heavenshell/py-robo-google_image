@@ -45,7 +45,7 @@ class Client(object):
         try:
             url = self.search_resource(query)
             if url:
-                return url['unescapedUrl']
+                return url['link']
         except Exception as e:
             logger.error('Error raised. Query is {0}'.format(query))
             logger.exception(e)
@@ -68,7 +68,7 @@ class Client(object):
         res = requests.get(self.GOOGLE_IMAGE_URL, params=params)
         if res.status_code == 200:
             body = json.loads(res.content)
-            resource = random.choice(body['responseData']['results'])
+            resource = random.choice(body['items'])
 
             return resource
 
