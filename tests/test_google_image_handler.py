@@ -55,7 +55,7 @@ class TestClient(TestCase):
         """ Client().generate() should generate google search url. """
         dummy_response(m, 'fixture.json')
         ret = self.client.generate('cat')
-        self.assertTrue(ret.startswith('http://'))
+        self.assertTrue(ret.startswith('http'))
 
     @patch('robo.handlers.google_image.requests.get')
     def test_search_resource(self, m):
@@ -63,7 +63,7 @@ class TestClient(TestCase):
         dummy_response(m, 'fixture.json')
         ret = self.client.search_resource('cat')
         self.assertTrue(isinstance(ret, dict))
-        self.assertTrue('unescapedUrl' in ret)
+        self.assertTrue('link' in ret)
 
 
 class TestGoogleImageHandler(TestCase):
